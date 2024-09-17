@@ -9,7 +9,7 @@ Kul
 Together, we are working on a web design that will showcase the Olympic Games in an inspiring and innovative way.
 
 Team Roles
-Himanshu: Will be making the Countries Tab and News Tab
+Himanshu: Will be making the Medals Tab and Credits Tab
 
 Mysha: [Put your role here]
 
