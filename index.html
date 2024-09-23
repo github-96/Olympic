@@ -3,388 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olympics</title>
+    <title>Olympic Medal Tally & News</title>
     <style>
-
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        .header {
-            background-color: #003a70;
-            color: #fff;
+        header {
+            background-color: #1f1f1f;
+            color: #f1c40f;
             padding: 20px;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .header img {
-            max-width: 150px;
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        nav {
+            background-color: #1f1f1f;
+            padding: 10px;
+            text-align: center;
         }
 
-        .tabs {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #ddd;
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .tab-button {
-            background-color: #f4f4f4;
-            color: #333;
-            border: none;
-            padding: 15px;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            border-bottom: 4px solid transparent;
-            outline: none;
-            flex: 1;
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
         }
 
-        .tab-button:hover, .tab-button.active {
-            background-color: #003a70;
-            color: #fff;
-            border-bottom: 4px solid #fff;
+        nav ul li a {
+            text-decoration: none;
+            color: #f1c40f;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            padding: 10px;
         }
 
-        .tab-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+        nav ul li a:hover {
+            background-color: #f1c40f;
+            color: #121212;
+            border-radius: 5px;
         }
 
-        .tab-content.active {
-            display: block;
-            opacity: 1;
+        main {
+            padding: 40px 20px;
         }
 
         table {
             width: 100%;
+            max-width: 1200px;
+            margin: auto;
             border-collapse: collapse;
-            margin-top: 20px;
+            background-color: #1c1c1c;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
-        table th, table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: center;
+        thead {
+            background-color: #f1c40f;
         }
 
-        th {
-            background-color: #003a70;
-            color: #fff;
+        thead th {
+            padding: 15px;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #121212;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #252525;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #2c2c2c;
+        }
+
+        tbody tr:hover {
+            background-color: #f1c40f;
+            color: #121212;
         }
 
         td {
-            background-color: #f9f9f9;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
         }
 
-        h2 {
-            color: #003a70;
-            margin-bottom: 20px;
+        .flag {
+            width: 40px;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .news-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .news-carousel {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .carousel {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-news {
+            flex: 2;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .main-news h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #f1c40f;
+        }
+
+        .main-news p {
+            font-size: 1.2em;
+        }
+
+        .additional-news {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .news-item {
+            flex: 1 1 calc(33% - 20px);
+            background-color: #252525;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #f1c40f;
+        }
+
+        .news-item p {
+            font-size: 1em;
         }
 
         footer {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #888;
+            background-color: #1f1f1f;
+            color: #f1c40f;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
         }
-
     </style>
 </head>
 <body>
 
-<div class="header">
-    <img src="https://logodownload.org/wp-content/uploads/2020/03/olimpiada-olympic-games-logo-0.png" alt="Olympics Logo">
-    <h1>The Olympics</h1>
-</div>
+    <header>
+        <h1>Olympics</h1>
+    </header>
 
-<div class="container">
-    <div class="tabs">
-        <button class="tab-button active" onclick="openTab('medals')">Medals</button>
-        <button class="tab-button" onclick="openTab('about')">About Us | Credits</button>
-    </div>
+    <nav>
+        <ul>
+            <li><a href="#medal-tally">Medal Tally</a></li>
+            <li><a href="#news-section">News</a></li>
+        </ul>
+    </nav>
 
-    <div id="medals" class="tab-content active">
-        <h2>Olympic Medals Table</h2>
-        <table>
-            <tr>
-                <th>Country</th>
-                <th>Gold</th>
-                <th>Silver</th>
-                <th>Bronze</th>
-                <th>Total</th>
-            </tr>
-            <tr>
-                <td>USA</td>
-                <td>39</td>
-                <td>41</td>
-                <td>33</td>
-                <td>113</td>
-            </tr>
-            <tr>
-                <td>China</td>
-                <td>38</td>
-                <td>32</td>
-                <td>18</td>
-                <td>88</td>
-            </tr>
-            <tr>
-                <td>Japan</td>
-                <td>27</td>
-                <td>14</td>
-                <td>17</td>
-                <td>58</td>
-            </tr>
-            <tr>
-                <td>UK</td>
-                <td>22</td>
-                <td>21</td>
-                <td>22</td>
-                <td>65</td>
-            </tr>
-            <tr>
-                <td>Russia</td>
-                <td>20</td>
-                <td>28</td>
-                <td>23</td>
-                <td>71</td>
-            </tr>
-            <tr>
-                <td>Australia</td>
-                <td>17</td>
-                <td>7</td>
-                <td>22</td>
-                <td>46</td>
-            </tr>
-            <tr>
-                <td>Netherlands</td>
-                <td>10</td>
-                <td>12</td>
-                <td>14</td>
-                <td>36</td>
-            </tr>
-            <tr>
-                <td>France</td>
-                <td>10</td>
-                <td>12</td>
-                <td>11</td>
-                <td>33</td>
-            </tr>
-            <tr>
-                <td>Germany</td>
-                <td>10</td>
-                <td>11</td>
-                <td>16</td>
-                <td>37</td>
-            </tr>
-            <tr>
-                <td>Italy</td>
-                <td>10</td>
-                <td>10</td>
-                <td>20</td>
-                <td>40</td>
-            </tr>
-            <tr>
-                <td>Canada</td>
-                <td>7</td>
-                <td>6</td>
-                <td>11</td>
-                <td>24</td>
-            </tr>
-            <tr>
-                <td>Brazil</td>
-                <td>7</td>
-                <td>6</td>
-                <td>8</td>
-                <td>21</td>
-            </tr>
-            <tr>
-                <td>New Zealand</td>
-                <td>7</td>
-                <td>6</td>
-                <td>7</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>Cuba</td>
-                <td>7</td>
-                <td>3</td>
-                <td>5</td>
-                <td>15</td>
-            </tr>
-            <tr>
-                <td>Hungary</td>
-                <td>6</td>
-                <td>7</td>
-                <td>7</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>Korea</td>
-                <td>6</td>
-                <td>4</td>
-                <td>10</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>Poland</td>
-                <td>4</td>
-                <td>5</td>
-                <td>5</td>
-                <td>14</td>
-            </tr>
-            <tr>
-                <td>Ukraine</td>
-                <td>3</td>
-                <td>1</td>
-                <td>4</td>
-                <td>8</td>
-            </tr>
-            <tr>
-                <td>Turkey</td>
-                <td>2</td>
-                <td>2</td>
-                <td>9</td>
-                <td>13</td>
-            </tr>
-            <tr>
-                <td>Greece</td>
-                <td>2</td>
-                <td>1</td>
-                <td>1</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>Denmark</td>
-                <td>2</td>
-                <td>1</td>
-                <td>4</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td>South Africa</td>
-                <td>3</td>
-                <td>2</td>
-                <td>1</td>
-                <td>6</td>
-            </tr>
-            <tr>
-                <td>Mexico</td>
-                <td>4</td>
-                <td>1</td>
-                <td>4</td>
-                <td>9</td>
-            </tr>
-            <tr>
-                <td>Argentina</td>
-                <td>3</td>
-                <td>2</td>
-                <td>1</td>
-                <td>6</td>
-            </tr>
-            <tr>
-                <td>Thailand</td>
-                <td>1</td>
-                <td>0</td>
-                <td>0</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>Egypt</td>
-                <td>1</td>
-                <td>1</td>
-                <td>3</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>Serbia</td>
-                <td>3</td>
-                <td>1</td>
-                <td>2</td>
-                <td>6</td>
-            </tr>
-            <tr>
-                <td>Slovenia</td>
-                <td>3</td>
-                <td>1</td>
-                <td>1</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>Belarus</td>
-                <td>1</td>
-                <td>3</td>
-                <td>1</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>India</td>
-                <td>1</td>
-                <td>2</td>
-                <td>4</td>
-                <td>7</td>
-            </tr>
-            
-        </table>
-    </div>
+    <main>
+        <section id="medal-tally">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>Flag</th>
+                        <th>Gold</th>
+                        <th>Silver</th>
+                        <th>Bronze</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>USA</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" width="50"></td>
+                        <td>39</td>
+                        <td>41</td>
+                        <td>33</td>
+                    </tr>
+                    <tr>
+                        <td>China</td>
+                        <td><img src="https://cdn.britannica.com/90/7490-050-5D33348F/Flag-China.jpg" width="50"></td>
+                        <td>38</td>
+                        <td>32</td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>Japan</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg" width="50"></td>
+                        <td>27</td>
+                        <td>14</td>
+                        <td>17</td>
+                    </tr>
+                    <tr>
+                        <td>Germany</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" width="50"></td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td>India</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" width="50"></td>
+                        <td>7</td>
+                        <td>6</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>UK</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" width="50"></td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td>France</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" width="50"></td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>Canada</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg" width="50"></td>
+                        <td>14</td>
+                        <td>13</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>Australia</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Australia.svg" width="50"></td>
+                        <td>17</td>
+                        <td>20</td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td>Brazil</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg" width="50"></td>
+                        <td>12</td>
+                        <td>10</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>Russia</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg" width="50"></td>
+                        <td>20</td>
+                        <td>28</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td>South Korea</td>
+                        <td><img src="https://cdn.britannica.com/49/1949-050-39ED83BA/Flag-South-Korea.jpg" width="50"></td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td>Italy</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/0/03/Flag_of_Italy.svg" width="50"></td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>Netherlands</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg" width="50"></td>
+                        <td>10</td>
+                        <td>12</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>Spain</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg" width="50"></td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td>New Zealand</td>
+                        <td><img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Flag_of_New_Zealand.svg" width="50"></td>
+                        <td>7</td>
+                        <td>6</td>
+                        <td>7</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-    <div id="about" class="tab-content">
-        <h2>About Us</h2>
-        <p>Welcome to the Olympics website. Here you can find information about the medal standings and learn more about the Olympic Games.</p>
-        <p>Designed and developed by: <strong>CodexCrew</strong></p>
-        <p>Special thanks to the IOC and all the athletes who make the Olympics an inspiring event.</p>
-        <h2>Credits</h2>
-        <h3>Information:</h3>
-        <p>
-            <a href="https://www.wikipedia.org/" target="_blank">WikiPedia</a><br>
-            <a href="https://olympics.com/" target="_blank">Olympics (Official Site)</a><br>
-            <!-- Add more if used other websites also -->
-        </p>
-        <h3>Images:</h3>
-        <p>
-            <a href="https://logodownload.org/" target="_blank">Logo Download</a>
-            <!-- Add more if used other websites also -->
-        </p>
-    </div>
+        <section class="news-section" id="news-section">
+            <h2>Latest Olympic News</h2>
+            <div class="news-carousel">
+                <div class="carousel">
+                    <img src="https://i0.wp.com/blog.myswimpro.com/wp-content/uploads/2021/08/caeleb-dressel-USA-flag.jpg?fit=788%2C540&ssl=1" alt="USA Swimming Dominance">
+                    <p>USA's Dominance in Swimming</p>
+                </div>
+                <div class="main-news">
+                    <h2>New Sports Added to the Olympics</h2>
+                    <p>This year, the International Olympic Committee has announced the inclusion of new sports, including skateboarding and surfing, set to attract a younger audience.</p>
+                </div>
+                <div class="carousel">
+                    <img src="https://img.olympics.com/images/image/private/t_16-9_760/f_auto/primary/gqw0qujfqaa0gexpwckx" alt="New Sports in Olympics">
+                    <p>Exciting Additions to the Games</p>
+                </div>
+            </div>
+            <div class="additional-news">
+                <div class="news-item">
+                    <h3>USA's Dominance in Swimming</h3>
+                    <p>The United States has shown unparalleled dominance in swimming events, securing numerous gold medals in the latest Olympic Games.</p>
+                </div>
+                <div class="news-item">
+                    <h3>New Sports Added to the Olympics</h3>
+                    <p>With new sports like skateboarding and surfing, the Olympics aims to engage a younger audience.</p>
+                </div>
+                <div class="news-item">
+                    <h3>Exciting Additions to the Games</h3>
+                    <p>The inclusion of fresh sports highlights the evolution of the Olympics and showcases innovative talent.</p>
+                </div>
+            </div>
+        </section>
+        
+    </main>
 
     <footer>
-        &copy; 2024 Olympics Website. All rights reserved.
+        <p>&copy; 2024 Global Olympic Federation</p>
     </footer>
-</div>
 
-<script>
-    function openTab(tabName) {
-        // Hide all tab content
-        const tabContents = document.querySelectorAll('.tab-content');
-        tabContents.forEach(content => content.classList.remove('active'));
-
-        // Remove 'active' class from all buttons
-        const tabButtons = document.querySelectorAll('.tab-button');
-        tabButtons.forEach(button => button.classList.remove('active'));
-
-        // Show the selected tab and set button as active
-        document.getElementById(tabName).classList.add('active');
-        document.querySelector(`[onclick="openTab('${tabName}')"]`).classList.add('active');
-    }
-</script>
-    
-</body>
-</html>
-
+</body
